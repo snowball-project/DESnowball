@@ -20,7 +20,7 @@ function(r.idx,
     classlabel <- classlabel[c.idx]
     ## distance
     if(method.dist %in% c("pearson","kendall","spearman"))
-      dist.profile <- as.dist(0.5*(1+cor(subset.dt,method=method.dist)))
+      dist.profile <- as.dist(0.5*(1-cor(subset.dt,method=method.dist)))
     else if (method.dist == "standardizedEuclid") stop("Not implemented yet!")
     else if (method.dist == "pfcluster")
       dist.profile <- as.dist(profile.dist(subset.dt,diss.type=1))

@@ -1,5 +1,7 @@
-rpselect <-
-function(dat,
+rpselect.para <-
+function(
+	 dat,
+	 ncore=2,
 	 d=300,
 	 B=100,
 	 k,
@@ -13,7 +15,33 @@ function(dat,
 	 leave.k=1)
     ### using fs.agreement.part to weight the features based on its partition
     ## agreement with the classlabel
-{
+{   
+    dat <- dat
+    d <- d
+    B <- B
+    k <- k
+    classlabel <- classlabel
+    sample.n <- sample.n
+    method.phi <- method.phi
+    method.dist <- method.dist
+    leave.k.out <- leave.k.out
+    leave.by <- leave.by
+    leave.k <- leave.k
+
+    cl <- start.para(ncore,
+		     varlist=c('dat',
+			       'd',
+			       'B',
+			       'k',
+			       'classlabel',
+			       'sample.n',
+			       'method.phi',
+			       'method.dist',
+			       'leave.k.out',
+			       'leave.by',
+			       'leave.k'),
+		     )
+
     weights.agg <- weight.aggregate(dat=dat,
 				    d=d,
 				    B=B,

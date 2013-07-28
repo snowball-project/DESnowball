@@ -6,9 +6,8 @@ function(x,
   {
     rd <- robust.distance.signed(x,method=method)
     pvals <- pchisq(rd,df=df,lower.tail=F)
-    genes <- row.names(x$weights.matrix)
-    full.list <- data.frame(genes=genes,
-                            rd=rd,
+    genes <- row.names(x)
+    full.list <- data.frame(rd=rd,
                             pvals=pvals,
                             positive=x$positives)[order(pvals,decreasing=F),]
     full.list

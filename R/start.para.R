@@ -4,7 +4,7 @@ function(ncore, varlist, type="MPI") {
                                 type=type)
   else cl <- NULL
   clusterExport(cl, varlist, envir=parent.frame())
-  .dump <- clusterEvalQ(cl, eval(dptws.initexpr))
+  .dump <- clusterEvalQ(cl, eval(snowball.initexpr))
   ##.dump <- sfClusterEval(eval(initExpr))
   cl
 }

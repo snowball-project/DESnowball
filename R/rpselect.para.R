@@ -1,6 +1,5 @@
 rpselect.para <-
-function(
-	 dat,
+function(dat,
 	 ncore=2,
 	 d=300,
 	 B=100,
@@ -16,18 +15,6 @@ function(
     ### using fs.agreement.part to weight the features based on its partition
     ## agreement with the classlabel
 {   
-    dat <- dat
-    d <- d
-    B <- B
-    k <- k
-    classlabel <- classlabel
-    sample.n <- sample.n
-    method.phi <- method.phi
-    method.dist <- method.dist
-    leave.k.out <- leave.k.out
-    leave.by <- leave.by
-    leave.k <- leave.k
-
     cl <- start.para(ncore,
 		     varlist=c('dat',
 			       'd',
@@ -42,19 +29,28 @@ function(
 			       'leave.k'),
 		     )
 
-    weights.agg <- weight.aggregate(dat=dat,
-				    d=d,
-				    B=B,
-				    k=k,
-				    classlabel=classlabel,
-				    sample.n=sample.n,
-				    method.phi=method.phi,
-				    method.dist=method.dist,
-				    leave.k.out=leave.k.out,
-				    leave.by=leave.by,
-				    leave.k=leave.k)
+    B.cl <- unlist(lapply(clusterSplit(cl, seq(B)),length))
+    .arg <- parLapply(cl, B.cl, function(x) weight.aggregate(dat=dat,
+							     d=d,
+							     B=x,
+							     k=k,
+							     classlabel=classlabel,
+							     sample.n=sample.n,
+							     method.phi=method.phi,
+							     method.dist=method.dist,
+							     leave.k.out=leave.k.out,
+							     leave.by=leave.by,
+							     leave.k=leave.k))
+    for(i in seq(along=.arg)) {
+	if(i==1) {
+	    .sum <- .arg[[1]]$sum
+	    .n <- .arg[[1]]$n
+	} else {
+	    .sum <- .sum+.arg[[i]]$sum
+	    .n <- .n+.arg[[i]]$n
+    }}
 
-    weights <- with(weights.agg, sum/n)
+    weights <- .sum/.n
     if(sum(is.nan(weights))>0) warning("Insufficient resampling!?")
     positives <- (weights>median(weights,na.rm=T))
     ret <- data.frame(weights=weights,

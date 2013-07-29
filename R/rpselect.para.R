@@ -41,6 +41,7 @@ function(dat,
 							     leave.k.out=leave.k.out,
 							     leave.by=leave.by,
 							     leave.k=leave.k))
+    stop.para(cl)
     for(i in seq(along=.arg)) {
 	if(i==1) {
 	    .sum <- .arg[[1]]$sum

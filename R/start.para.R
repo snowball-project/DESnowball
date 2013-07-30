@@ -1,7 +1,6 @@
 start.para <-
 function(ncore, varlist, type="MPI") {
-  if(ncore>1) cl <- makeCluster(getOption("cl.cores",ncore),
-                                type=type)
+  if(ncore>1) cl <- makeCluster(ncore,type=type)
   else cl <- NULL
   clusterExport(cl, 
 		c("snowball.initexpr",varlist), 

@@ -2,7 +2,8 @@ rpselect.para <-
 function(dat,
 	 ncore=2,
 	 d=300,
-	 B=100,
+	 B=10000,
+	 B.i=2000,
 	 k,
 	 classlabel,
 	 sample.n=100,
@@ -29,7 +30,8 @@ function(dat,
 			       'leave.k'),
 		     )
 
-    B.cl <- unlist(lapply(clusterSplit(cl, seq(B)),length))
+    if(B.i<=0) B.cl <- unlist(lapply(clusterSplit(cl, seq(B)),length))
+    else B.cl <- c(rep(B.i, B%/%B.i), if(B%%B.i>0) B%%B.i else NULL) 
     .arg <- parLapply(cl, B.cl, function(x) weight.aggregate(dat=dat,
 							     d=d,
 							     B=x,

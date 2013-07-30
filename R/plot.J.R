@@ -18,10 +18,12 @@ function(x,fs,
       row.names(x) %in% row.names(subset(fs$selectedList,subset=positive))
     points(seq(along=x$weights)[!sigs],x$weights[!sigs],pch=pch.nonsig)
     points(seq(along=x$weights)[positives],x$weights[positives],pch=pch.sig,col=col.pos)
-    
+    negatives <-	
+	row.names(x) %in% row.names(subset(fs$selectedList,subset=!positive))
+
     if(plot.neg) {
-	negatives <-	
-	    row.names(x) %in% row.names(subset(fs$selectedList,subset=!positive))
 	points(seq(along=x$weights)[negatives],x$weights[negatives],pch=pch.sig,col=col.neg)
+    } else {
+	points(seq(along=x$weights)[negatives],x$weights[negatives],pch=pch.nonsig)
     }
 }

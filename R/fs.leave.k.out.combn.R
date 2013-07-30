@@ -2,7 +2,7 @@ fs.leave.k.out.combn <-
 function(r.idx,dt,classlabel,
            k=2,
            method.agreement=c("euclidean","manhattan","Rand","cRand","NMI",
-             "KP","angle","diag","Jaccard","FM"),
+             "KP","angle","diag","Jaccard","FM","gdbr"),
            method.dist=c("pearson","kendall","spearman","standardizedEuclid",
              "pfcluster","euclidean"),
            leave.by=c("whole","class.count","class.percent"),leave.k=1,

@@ -25,3 +25,23 @@ gdbr_fstat <- function(casecon, G) {
     Fstat = Fstat.num / Fstat.denom	
     Fstat
 }
+
+gdbr_perm <- function(y, D, perm.n=1000) {
+    if(is(y, "character")) y <- y==unique(y)[1] ## assume y is dichotomous
+    idx <- sample(seq(y),
+                  length(y)*perm.n,
+                  replace=T)
+    y.mx <- matrix(y[idx],
+                   nrow=perm.n)
+    res <- apply(y.mx, 1, gdbr, D=D)
+    res
+}
+
+gdbr_permtest <- function(y,D,perm.n=1000) {
+    if(is(y, "character")) y <- y==unique(y)[1] ## assume y is dichotomous
+    fstats <- gdbr_perm(y,D,perm.n)
+    pval <- sum(fstats > gdbr(y,D))/perm.n
+    pval
+}
+
+

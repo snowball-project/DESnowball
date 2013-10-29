@@ -7,7 +7,7 @@ function(dat,
 	 sample.n=100,
 	 method.phi=c("correspondence","Rand","cRand","NMI","gdbr"),
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
-		       "pfcluster","euclidean"),
+		       "pfcluster","euclidean","pearson.u","kendall.u","spearman.u"),
 	 leave.k.out=c("sample","none","combn"),
 	 leave.by=c("class.count","whole","class.percent"),
 	 leave.k=1)

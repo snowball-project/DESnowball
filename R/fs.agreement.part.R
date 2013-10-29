@@ -9,7 +9,7 @@ function(r.idx,
 			    "KP","angle","diag","Jaccard","FM",
 			    "gdbr"),
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
-		       "pfcluster","euclidean")
+		       "pfcluster","euclidean","pearson.u","kendall.u","spearman.u")
 	 )
     ## partition subset of dt[idx] and then calculate
     ## the agreement measure with the classLabel
@@ -23,6 +23,8 @@ function(r.idx,
     ## distance
     if(method.dist %in% c("pearson","kendall","spearman"))
 	dist.profile <- as.dist(0.5*(1-cor(subset.dt,method=method.dist,use="complete.obs")))
+	else if (method.dist) %in% c("pearson.u","kendall.u","spearman.u")
+	dist.profile <- as.dist(1-abs(cor(subset.dt,method=method.dist,use="complete.obs")))
     else if (method.dist == "standardizedEuclid") stop("Not implemented yet!")
     else if (method.dist == "pfcluster")
 	dist.profile <- as.dist(profile.dist(subset.dt,diss.type=1))

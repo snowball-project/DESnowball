@@ -4,7 +4,7 @@ function(r.idx,dt,classlabel,
            method.agreement=c("euclidean","manhattan","Rand","cRand","NMI",
              "KP","angle","diag","Jaccard","FM","gdbr"),
            method.dist=c("pearson","kendall","spearman","standardizedEuclid",
-             "pfcluster","euclidean"),
+             "pfcluster","euclidean","euclidean","pearson.u","kendall.u","spearman.u"),
            leave.by=c("whole","class.count","class.percent"),leave.k=1,
            return.value=c("mean","sd"))
   ## leave k out algorithm with exactly every possible combination for classlabel

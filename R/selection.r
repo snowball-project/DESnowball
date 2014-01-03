@@ -5,7 +5,7 @@ fs.selection <- function(full.list,
   ## select the significant features based on p values
 {
     selected.list <- subset(full.list,
-			    subset=p.adjust(pval,
+			    subset=p.adjust(full.list$pval,
 					    method=p.adjust.method) < cutoff.p)
     selected.list
 }

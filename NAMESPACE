@@ -1,4 +1,4 @@
-export(plot.J)
+export(plotJn)
 export(select.features)
 export(snowball)
 export(toplist)

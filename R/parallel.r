@@ -6,8 +6,19 @@ function(ncore, varlist, type=NULL) {
   }
   else cl <- NULL
  clusterExport(cl, 
-		c("snowball.initexpr",varlist), 
+		c(varlist), 
 		envir=parent.frame())
-  .dump <- clusterEvalQ(cl, eval(snowball.initexpr))
+  .dump <- clusterEvalQ(cl, eval(require(DESnowball)))
   cl
 }
+
+stop.para <-
+function(cl) {
+  stopCluster(cl)
+}
+#
+#snowball.initexpr <- function(){
+#  expression({
+#      require(DESnowball)
+#  })
+#}

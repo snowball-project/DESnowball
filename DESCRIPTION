@@ -1,7 +1,6 @@
-Package: snowball
+Package: DESnowball
 Type: Package
-Title: Snowball: resampling combined with distance-based regression to discover
-    transcriptional consequences of driver mutation
+Title: Bagging with Distance-based Regression for Differential Gene Expression Analyses 
 Version: 1.0
 Date: 2013-07-20
 Author: Yaomin Xu <yaomin.xu@vanderbilt.edu>
@@ -14,34 +13,6 @@ Imports:
     MASS,
     parallel,
     cluster
-Description: Whole-genome differential gene expression analysis on a driver
-    mutation
+Description: This package implements a statistical data mining method to compare whole genome gene expression
+    profiles with respect to the presence of a recurrent genetic disturbance event to identify the affected target genes.
 License: GPL-3
-Collate:
-    'combn.classlabel.idx.aux1.R'
-    'combn.classlabel.idx.aux2.R'
-    'fs.agreement.part.R'
-    'fs.leave.k.out.combn.R'
-    'fs.leave.k.out.sample.R'
-    'fs.rd.R'
-    'fs.selection.R'
-    'gdbr.R'
-    'members.R'
-    'nmembers.R'
-    'plot.FIT.R'
-    'plot.J.R'
-    'plotprofile.R'
-    'robust.distance.signed.R'
-    'sample.classlabel.idx.R'
-    'sample.classlabel.idx.aux1.R'
-    'sample.classlabel.idx.aux2.R'
-    'select.features.R'
-    'seq.ncol.R'
-    'snowball-package.r'
-    'snowball.r'
-    'start.para.R'
-    'stop.para.R'
-    'toplist.R'
-    'weight.aggregate.R'
-    'weight.matrix.R'
-    'weight.summary.R'

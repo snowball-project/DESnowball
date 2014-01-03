@@ -4,8 +4,8 @@ function(r.idx,dt,classlabel,
            method.agreement=c("euclidean","manhattan","Rand","cRand","NMI",
              "KP","angle","diag","Jaccard","FM","gdbr"),
            method.dist=c("pearson","kendall","spearman","standardizedEuclid",
-             "pfcluster","euclidean","euclidean","pearson.u","kendall.u","spearman.u"),
-           leave.by=c("whole","class.count","class.percent"),leave.k=1,
+             "euclidean","euclidean","pearson.u","kendall.u","spearman.u"),
+           leave.by=c("count.class","flat","percent.class"),leave.k=1,
            return.value=c("mean","sd"))
   ## leave k out algorithm with exactly every possible combination for classlabel
   {
@@ -14,13 +14,13 @@ function(r.idx,dt,classlabel,
     return.value <- match.arg(return.value)
     if(is.null(r.idx)) r.idx <- seq(nrow(dt))
     leave.by <- match.arg(leave.by)
-    if(identical(leave.by,"whole")) {
+    if(identical(leave.by,"flat")) {
       nu.idx <- t(combn(seq(classlabel),length(classlabel)-leave.k))
     }
-    else if(identical(leave.by,"class.count")) {
+    else if(identical(leave.by,"count.class")) {
       nu.idx <- combn.classlabel.idx(classlabel,leave.k=leave.k,leave.k.mode="count")
     }
-    else if(identical(leave.by,"class.percent")) {
+    else if(identical(leave.by,"percent.class")) {
       nu.idx <- combn.classlabel.idx(classlabel,leave.k=leave.k,leave.k.mode="percent")
     }
     else stop("Unsupported leave.by value!")

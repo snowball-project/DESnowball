@@ -16,9 +16,9 @@ a data.frame with two columns \code{RD} and \code{pvalue}
 Report the top list based on p values.
 }
 \references{
-Yaomin Xu, Xingyi Guo, Jiayang Sun, Zhongming Zhao.
-Snowball: Resampling combined with distance-based
-regression to discover transcriptional consequences of
-driver mutation (submitted)
+Xu, Y., Guo, X., Sun, J. and Zhao. Z. Snowball: resampling
+combined with distance-based regression to discover
+transcriptional consequences of driver mutation,
+manuscript.
 }
 

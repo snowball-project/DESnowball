@@ -1,7 +1,6 @@
 #' Mutation status of 14 patients
-
+#'
 #' A character vector indicating the mutation status of 14 patients
-
 #' @docType data
 #' @keywords datasets
 #' @format A character vector of 14 elements

@@ -31,4 +31,10 @@ Gene selection based on the statistical significances
 according to the Snowball approach (see references for more
 details).
 }
+\references{
+Xu, Y., Guo, X., Sun, J. and Zhao. Z. Snowball: resampling
+combined with distance-based regression to discover
+transcriptional consequences of driver mutation,
+manuscript.
+}
 

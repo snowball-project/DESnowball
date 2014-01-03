@@ -11,7 +11,7 @@ function(dat,
 	 leave.k.out=c("sample","none","combn"),
 	 leave.by=c("class.count","whole","class.percent"),
 	 leave.k=1)
-### using fs.agreement.part to weight the features based on its partition
+ ## use fs.agreement.part to weight the features based on its partition
  ## agreement with the classlabel
   {
     method <- match.arg(method.phi)

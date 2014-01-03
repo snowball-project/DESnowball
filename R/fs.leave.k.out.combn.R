@@ -9,7 +9,6 @@ function(r.idx,dt,classlabel,
            return.value=c("mean","sd"))
   ## leave k out algorithm with exactly every possible combination for classlabel
   {
-    require(combinat)
     method.agreement <- match.arg(method.agreement)
     method.dist <- match.arg(method.dist)
     return.value <- match.arg(return.value)

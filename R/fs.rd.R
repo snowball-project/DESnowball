@@ -2,13 +2,12 @@ fs.rd <-
 function(x,
 	 method="mcd",
 	 df=1)
-    ## calculate teh robust distance and its p values based on Chisq distribution
 {
     rd <- robust.distance.signed(x,method=method)
-    pvals <- pchisq(rd,df=df,lower.tail=F)
+    pval <- pchisq(rd,df=df,lower.tail=F)
     full.list <- data.frame(rd=rd,
-                            pvals=pvals,
+                            pval=pval,
                             positive=x$positives)
     row.names(full.list) <- row.names(x)
-    full.list[order(pvals,decreasing=F),]
+    full.list[order(pval,decreasing=F),]
 }

@@ -11,11 +11,7 @@ function(r.idx,
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
 		       "pfcluster","euclidean","pearson.u","kendall.u","spearman.u")
 	 )
-    ## partition subset of dt[idx] and then calculate
-    ## the agreement measure with the classLabel
-    ## agreement method see 'agreement' in package 'clue'
 {
-    require(clue)
     method <- match.arg(method.agreement)
     method.dist <- match.arg(method.dist)
     subset.dt <- dt[r.idx,c.idx]

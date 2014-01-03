@@ -1,28 +1,35 @@
-plot.J <-
-function(x,fs,
-	 pch.nonsig=21,pch.sig=19,
-	 plot.neg=F,
-	 col.pos="red",col.neg="blue",
-	 abs=T)
-  ## x is the output from fs.randomWeight.part
-  ## fs is the output from feature selection
+#' Plot Jn values
+#'
+#' Plot the \eqn{J_n(x)} values of a snowball output, with the significant genes highlighted.
+#' @param x an output from \code{snowball}
+#' @param fs the corresponding output from \code{select.features}
+#' @param pch.nonsig \code{pch} of the symbols for non-significant genes. See \code{\link{par}} for more details
+#' @param pch.sig \code{pch} of the symbols for significant genes.
+#' @param below.median a \code{logical} value, set to \code{TRUE} if the genes blow the median are to be plotted
+#' @param col.above set the color for genes above the median
+#' @param col.below set the color for genes below the median
+#' @export
+plot.J <- function(x,fs,
+		   pch.nonsig=21,pch.sig=19,
+		   below.median=T,
+		   col.above="red",col.below="red")
 {
     plot(seq(along=x$weights),
-         if(abs) abs(x$weights) else x$weights,
+         x$weights,
          xlab="Gene Index",
-         ylab="J score",
-         main="Feature selection",
+         ylab="Jn score",
+         main="Snowball analysis",
          type="n")
     sigs <- row.names(x)%in%row.names(fs$selectedList)
     positives <-
       row.names(x) %in% row.names(subset(fs$selectedList,subset=positive))
     points(seq(along=x$weights)[!sigs],x$weights[!sigs],pch=pch.nonsig)
-    points(seq(along=x$weights)[positives],x$weights[positives],pch=pch.sig,col=col.pos)
+    points(seq(along=x$weights)[positives],x$weights[positives],pch=pch.sig,col=col.above)
     negatives <-	
 	row.names(x) %in% row.names(subset(fs$selectedList,subset=!positive))
 
-    if(plot.neg) {
-	points(seq(along=x$weights)[negatives],x$weights[negatives],pch=pch.sig,col=col.neg)
+    if(below.median) {
+	points(seq(along=x$weights)[negatives],x$weights[negatives],pch=pch.sig,col=col.below)
     } else {
 	points(seq(along=x$weights)[negatives],x$weights[negatives],pch=pch.nonsig)
     }

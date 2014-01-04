@@ -1,10 +1,10 @@
 plot.FIT <-
 function(fs,
-           plot.xlab="Gene Index",plot.ylab="FIT",plot.main="Main Title",
-           qqplot.ylab="FIT^2",qqplot.xlab="Chisq Quantitle",
-           pch.nonsig=21,pch.sig=19,col.pos="red",col.neg="blue")
-  ## fs from feature.selection
-  {
+	 plot.xlab="Gene Index",plot.ylab="FIT",plot.main="Main Title",
+	 qqplot.ylab="FIT^2",qqplot.xlab="Chisq Quantitle",
+	 pch.nonsig=21,pch.sig=19,col.pos="red",col.neg="blue")
+    ## fs from feature.selection
+{
     sx <- sort(qchisq(ppoints(fs$fullList$rd),df=1))
     sy <- sort(fs$fullList$rd)
     sy.sign <- fs$fullList$positive[order(fs$fullList$rd)]
@@ -20,4 +20,4 @@ function(fs,
            pch=pch.sig,
            col=col.neg)
     abline(0,1,col="gray25",lty=2)
-  }
+}

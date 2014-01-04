@@ -1,3 +1,32 @@
+weight.aggregate <- function(dat,
+			     d=300,
+			     B=100,
+			     k,
+			     classlabel,
+			     sample.n=100,
+			     method.phi=c("correspondence","Rand","cRand","NMI"),
+			     method.dist=c("pearson","kendall","spearman","standardizedEuclid",
+					   "euclidean","pearson.u","kendall.u","spearman.u"),
+			     leave.k.out=c("sample","none","combn"),
+			     leave.by=c("count.class","flat","percent.class"),
+			     leave.k=1)
+{
+    wm <- weight.matrix(dat=dat,
+			d=d,
+			B=B,
+			k=k,
+			classlabel=classlabel,
+			sample.n=sample.n,
+			method.phi=method.phi,
+			method.dist=method.dist,
+			leave.k.out=leave.k.out,
+			leave.by=leave.by,
+			leave.k=leave.k)
+    ret <- data.frame(sum=weight.sum(wm), n=weight.n(wm))
+    row.names(ret) <- row.names(dat)
+    ret
+}
+
 weight.matrix <-
 function(dat,
 	 d=300,
@@ -7,11 +36,11 @@ function(dat,
 	 sample.n=100,
 	 method.phi=c("correspondence","Rand","cRand","NMI","gdbr"),
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
-		       "pfcluster","euclidean","pearson.u","kendall.u","spearman.u"),
+		       "euclidean","pearson.u","kendall.u","spearman.u"),
 	 leave.k.out=c("sample","none","combn"),
-	 leave.by=c("class.count","whole","class.percent"),
+	 leave.by=c("count.class","flat","percent.class"),
 	 leave.k=1)
-### using fs.agreement.part to weight the features based on its partition
+ ## use fs.agreement.part to weight the features based on its partition
  ## agreement with the classlabel
   {
     method <- match.arg(method.phi)
@@ -67,3 +96,21 @@ function(dat,
     }
     weights.matrix
   }
+
+
+weight.sum <- function(wm) {
+    rowSums(wm, na.rm=T)
+}
+
+weight.n <- function(wm) {
+    rowSums(!is.na(wm))
+}
+
+weight.mean <- function(wm) {
+    rowMeans(wm, na.rm=T)
+}
+
+weight.sd <- function(wm) {
+    apply(wm, 1, sd, na.rm=T)
+}
+

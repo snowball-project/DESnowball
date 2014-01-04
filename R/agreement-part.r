@@ -9,13 +9,9 @@ function(r.idx,
 			    "KP","angle","diag","Jaccard","FM",
 			    "gdbr"),
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
-		       "pfcluster","euclidean","pearson.u","kendall.u","spearman.u")
+		       "euclidean","pearson.u","kendall.u","spearman.u")
 	 )
-    ## partition subset of dt[idx] and then calculate
-    ## the agreement measure with the classLabel
-    ## agreement method see 'agreement' in package 'clue'
 {
-    require(clue)
     method <- match.arg(method.agreement)
     method.dist <- match.arg(method.dist)
     subset.dt <- dt[r.idx,c.idx]
@@ -28,8 +24,6 @@ function(r.idx,
 		dist.profile <- as.dist(1-abs(cor(subset.dt,method=.method.dist,use="complete.obs")))
 	}
     else if (method.dist == "standardizedEuclid") stop("Not implemented yet!")
-    else if (method.dist == "pfcluster")
-	dist.profile <- as.dist(profile.dist(subset.dt,diss.type=1))
     else dist.profile <- dist(t(subset.dt),method=method.dist)
     ## partition using pam
     if(method %in% c("gdbr")) {

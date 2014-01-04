@@ -1,9 +1,23 @@
-Package: snowball
+Package: DESnowball
 Type: Package
-Title: What the package does (short line)
+Title: Bagging with Distance-based Regression for Differential Gene Expression
+    Analyses
 Version: 1.0
-Date: 2013-07-20
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2014-1-2
+Author: Yaomin Xu <yaomin.xu@vanderbilt.edu>
+Maintainer: Yaomin Xu <yaomin.xu@vanderbilt.edu>
+Depends:
+    R (>= 3.0.0)
+Imports:
+    clue,
+    combinat,
+    MASS,
+    parallel,
+    cluster
+Description: This package implements a statistical data mining method to
+    compare whole genome gene expression profiles, with respect to the presence
+    of a recurrent genetic disturbance event, to identify the affected target
+    genes.
+License: GPL-3
+URL: https://github.com/snowball-project/DESnowball
+BugReports: https://github.com/snowball-project/DESnowball/issues

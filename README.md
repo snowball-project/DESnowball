@@ -16,22 +16,24 @@ From R:
 	install_github("DESnowball", user="snowball-project")
 
 ## Usage
-Example: snowball analysis on the demo dataset included in the package 
-    library(DESnowball)
-    data(snowball.demoData)
-    # A test run
-    Bn <- 10000
-    ncore <-4
-    # call Snowball
-    sb <- snowball(y=sb.mutation,X=sb.expression,
-    	          ncore=ncore,d=100,B=Bn,
-		  sample.n=1)
-    # process the gene ranking and selection
-    sb.sel <- select.features(sb)
-    # plot the Jn values
-    plotJn(sb, sb.sel)
-    # get the significant gene list
-    top.genes <- toplist(sb.sel)
+Example:
+ 
+        # snowball analysis on the demo dataset included in the package 
+        library(DESnowball)
+        data(snowball.demoData)
+        # A test run
+        Bn <- 10000
+        ncore <-4
+        # call Snowball
+        sb <- snowball(y=sb.mutation,X=sb.expression,
+    	              ncore=ncore,d=100,B=Bn,
+		      sample.n=1)
+        # process the gene ranking and selection
+        sb.sel <- select.features(sb)
+        # plot the Jn values
+        plotJn(sb, sb.sel)
+        # get the significant gene list
+        top.genes <- toplist(sb.sel)
 ## References
 Xu, Y. and Sun, J. (2005) PfCluster: a new cluster analysis procedure for gene expression profiles. Presented at a conference on Nonparametric Inference and Probability With Applications to Science honoring Michael Woodroofe; September 24-25, 2005; Ann Arbor, Mich, 2005. 
 

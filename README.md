@@ -25,9 +25,12 @@ Example:
         Bn <- 10000
         ncore <-4
         # call Snowball
-        sb <- snowball(y=sb.mutation,X=sb.expression,
-    	              ncore=ncore,d=100,B=Bn,
-		      sample.n=1)
+        sb <- snowball(y=sb.mutation,
+                       X=sb.expression,
+                       ncore=ncore,
+                       d=100,
+                       B=Bn,
+                       sample.n=1)
         # process the gene ranking and selection
         sb.sel <- select.features(sb)
         # plot the Jn values

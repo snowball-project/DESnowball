@@ -27,7 +27,7 @@ function(r.idx,
     else dist.profile <- dist(t(subset.dt),method=method.dist)
     ## partition using pam
     if(method %in% c("gdbr")) {
-	ret <- gdbr(as.numeric(as.factor(classlabel)), dist.profile)
+	ret <- gdbr(as.numeric(as.factor(classlabel)), as.matrix(dist.profile))
     } else {
 	pam.cl <- pam(dist.profile,k,diss=T,cluster.only=T)
 	ret <- cl_agreement(as.cl_hard_partition(pam.cl),

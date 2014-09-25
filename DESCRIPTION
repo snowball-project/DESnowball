@@ -13,7 +13,8 @@ Imports:
     combinat,
     MASS,
     parallel,
-    cluster
+    cluster,
+    gdbr
 Description: This package implements a statistical data mining method to
     compare whole genome gene expression profiles, with respect to the presence
     of a recurrent genetic disturbance event, to identify the affected target

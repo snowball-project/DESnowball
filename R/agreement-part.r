@@ -7,7 +7,7 @@ function(r.idx,
 	 k=2,
 	 method.agreement=c("euclidean","manhattan","Rand","cRand","NMI",
 			    "KP","angle","diag","Jaccard","FM",
-			    "gdbr"),
+			    "gdbr",  "gdbrcpp"),
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
 		       "euclidean","pearson.u","kendall.u","spearman.u")
 	 )
@@ -27,10 +27,14 @@ function(r.idx,
     else dist.profile <- dist(t(subset.dt),method=method.dist)
     ## partition using pam
     if(method %in% c("gdbr")) {
-	ret <- gdbr(as.numeric(as.factor(classlabel)), as.matrix(dist.profile))
-    } else {
-	pam.cl <- pam(dist.profile,k,diss=T,cluster.only=T)
-	ret <- cl_agreement(as.cl_hard_partition(pam.cl),
+		ret <- gdbr(as.numeric(as.factor(classlabel)), as.matrix(dist.profile))
+    } else if (method %in% c("gdbrcpp")) {
+		#cat("dist.profile: ", typeof(as.matrix(dist.profile)), as.matrix(dist.profile), dist.profile, "\n");
+		#cat("y:            ", typeof(as.numeric(as.factor(classlabel))), as.numeric(as.factor(classlabel)), "\n");
+		ret <- gdbrcpp(as.matrix(dist.profile), as.numeric(as.factor(classlabel)))$Fstat
+	} else {
+		pam.cl <- pam(dist.profile,k,diss=T,cluster.only=T)
+		ret <- cl_agreement(as.cl_hard_partition(pam.cl),
 			    as.cl_hard_partition(classlabel),
 			    method = method.agreement)
     }

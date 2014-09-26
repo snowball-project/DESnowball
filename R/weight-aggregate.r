@@ -34,7 +34,7 @@ function(dat,
 	 k,
 	 classlabel,
 	 sample.n=100,
-	 method.phi=c("correspondence","Rand","cRand","NMI","gdbr"),
+	 method.phi=c("correspondence","Rand","cRand","NMI","gdbr", "gdbrcpp"),
 	 method.dist=c("pearson","kendall","spearman","standardizedEuclid",
 		       "euclidean","pearson.u","kendall.u","spearman.u"),
 	 leave.k.out=c("sample","none","combn"),
@@ -89,8 +89,8 @@ function(dat,
                                  leave.by=leave.by,
                                  leave.k=leave.k)
     }
-    else stop("Unsupported leave.k.out,only none,combn or sample are supported")      
-    
+    else stop("Unsupported leave.k.out,only none,combn or sample are supported")
+
     for (i in seq(B)) {
       weights.matrix[idx[i,],i] <- agreement.measure[i]
     }
@@ -113,4 +113,3 @@ weight.mean <- function(wm) {
 weight.sd <- function(wm) {
     apply(wm, 1, sd, na.rm=T)
 }
-

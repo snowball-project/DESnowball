@@ -2,7 +2,7 @@ fs.leave.k.out.sample <-
 function(r.idx,dt,classlabel,
            k=2,n,
            method.agreement=c("euclidean","manhattan","Rand","cRand","NMI",
-             "KP","angle","diag","Jaccard","FM","gdbr"),
+             "KP","angle","diag","Jaccard","FM","gdbr", "gdbrcpp"),
            method.dist=c("pearson","kendall","spearman","standardizedEuclid",
              "euclidean","euclidean","pearson.u","kendall.u","spearman.u"),
            leave.by=c("count.class","flat","percent.class"),leave.k=1,

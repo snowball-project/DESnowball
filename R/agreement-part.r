@@ -13,25 +13,27 @@ function(r.idx,
 	 )
 {
     method <- match.arg(method.agreement)
-    method.dist <- match.arg(method.dist)
-    subset.dt <- dt[r.idx,c.idx]
+#    method.dist <- match.arg(method.dist)
+#    subset.dt <- dt[r.idx,c.idx]
     classlabel <- classlabel[c.idx]
     ## distance
-    if(method.dist %in% c("pearson","kendall","spearman"))
-	dist.profile <- as.dist(0.5*(1-cor(subset.dt,method=method.dist,use="complete.obs")))
-	else if (method.dist %in% c("pearson.u","kendall.u","spearman.u")){
-		.method.dist <- sub(".u","",method.dist)
-		dist.profile <- as.dist(1-abs(cor(subset.dt,method=.method.dist,use="complete.obs")))
-	}
-    else if (method.dist == "standardizedEuclid") stop("Not implemented yet!")
-    else dist.profile <- dist(t(subset.dt),method=method.dist)
+	dist.profile <-dt[c.idx,c.idx]
+#    if(method.dist %in% c("pearson","kendall","spearman"))
+#	dist.profile <- as.dist(0.5*(1-cor(subset.dt,method=method.dist,use="complete.obs")))
+#	else if (method.dist %in% c("pearson.u","kendall.u","spearman.u")){
+#		.method.dist <- sub(".u","",method.dist)
+#		dist.profile <- as.dist(1-abs(cor(subset.dt,method=.method.dist,use="complete.obs")))
+#	}
+#    else if (method.dist == "standardizedEuclid") stop("Not implemented yet!")
+#    else dist.profile <- dist(t(subset.dt),method=method.dist)
+	
     ## partition using pam
     if(method %in% c("gdbr")) {
-		ret <- gdbr(as.numeric(as.factor(classlabel)), as.matrix(dist.profile))
+		ret <- gdbr(as.numeric(as.factor(classlabel)), dist.profile)
     } else if (method %in% c("gdbrcpp")) {
 		#cat("dist.profile: ", typeof(as.matrix(dist.profile)), as.matrix(dist.profile), dist.profile, "\n");
 		#cat("y:            ", typeof(as.numeric(as.factor(classlabel))), as.numeric(as.factor(classlabel)), "\n");
-		ret <- gdbrcpp(as.matrix(dist.profile), as.numeric(as.factor(classlabel)))$Fstat
+		ret <- gdbrcpp(dist.profile, as.numeric(as.factor(classlabel)))$Fstat
 	} else {
 		pam.cl <- pam(dist.profile,k,diss=T,cluster.only=T)
 		ret <- cl_agreement(as.cl_hard_partition(pam.cl),

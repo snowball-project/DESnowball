@@ -105,7 +105,11 @@ snowball <- function(y,
     k <- 2
     classlabel <- y
     method.phi <- match.arg(method.options)
+	resample.method <- match.arg(resample.method)
+	mode.resample <- match.arg(mode.resample)
     method.dist <- "pearson"
+#	method.dist <- match.arg(method.dist)
+	
     leave.k.out <- resample.method
     leave.by <- mode.resample
     leave.k <- k.resample

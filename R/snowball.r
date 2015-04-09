@@ -91,7 +91,8 @@ snowball <- function(y,
 		     resample.method = c("sample","none","combn"),
 		     mode.resample = c("count.class","flat","percent.class"),
 		     k.resample = 1,
-			 method.options = c("gdbr","gdbrcpp"))
+			 method.options = c("gdbr","gdbrcpp"),
+			 para.comp.type="MPI")
 {
     ## check inputs
     if(!is(y,"factor")) y <- as.factor(y)
@@ -133,6 +134,7 @@ snowball <- function(y,
 				   'leave.k.out',
 				   'leave.by',
 				   'leave.k'),
+			 type = para.comp.type
 			 )
         ## on each node, calculate B.i phi values
 	if(B.i<=0) B.cl <- unlist(lapply(clusterSplit(cl, seq(B)),length))

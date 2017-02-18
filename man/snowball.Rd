@@ -4,7 +4,8 @@
 \usage{
 snowball(y, X, ncore = 1, d = 300, B = 10000, B.i = 2000,
   sample.n = 100, resample.method = c("sample", "none", "combn"),
-  mode.resample = c("count.class", "flat", "percent.class"), k.resample = 1)
+  mode.resample = c("count.class", "flat", "percent.class"), k.resample = 1,
+  method.options = c("gdbr","gdbrcpp"))
 }
 \arguments{
   \item{y}{a factor variable for mutation status}
@@ -62,6 +63,9 @@ snowball(y, X, ncore = 1, d = 300, B = 10000, B.i = 2000,
   "count.class"} and a numerical number between 0 and 1 if
   \code{mode.resample} = "percent.class". See Note for more
   information.}
+
+  \item{method.options}{Select between straight R GDBR or
+  C++ version. Options include "gdbr" and "gdbrcpp".}
 }
 \value{
 A data.frame containing two variables: \code{weights} and
@@ -153,4 +157,3 @@ combined with distance-based regression to discover
 transcriptional consequences of driver mutation,
 manuscript.
 }
-
